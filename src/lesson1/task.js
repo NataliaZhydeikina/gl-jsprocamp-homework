@@ -2,7 +2,7 @@
   Напишите функцию, которая принимает 1 аргумент и возварщает его тип
 */
 function getDataType(variable) {
-
+  return typeof variable;
 }
 
 /*
@@ -14,7 +14,22 @@ function getDataType(variable) {
   'object-function' - если функция
 */
 function getDataTypePseudoName(variable) {
-
+  let variableType = typeof variable;
+  if( [null, undefined].includes(variable) ) {
+    return 'primitive-special';
+  }
+   else if( Array.isArray(variableType) ) {
+    return 'object-array';
+  }
+   else if( variableType == 'function' ) {
+    return 'object-function';
+  } 
+  else if( ['number', 'boolean', 'symbol'].includes(variableType) ) {
+    return 'primitive';
+  }
+   else if( variableType  == 'object'){
+    return 'object';
+  }
 }
 
 
@@ -25,7 +40,15 @@ function getDataTypePseudoName(variable) {
   и -1 в другом случае
 */
 function compareByType(a, b) {
-
+  if( a === b ) {
+    return 1;
+  } 
+  else if( a == b ) {
+    return 0;
+  } 
+  else {
+    return -1;
+  }
 }
 
 // Numbers
@@ -157,6 +180,9 @@ function calcComparison(expression) {
   { a: 1, b: 2 }, '.c' => exception
 */
 function evalKey(obj, expression) {
+  let properties = expression.split('.')subarray(1).reduce((value, result)=>{
+    return obj[val]
+  }, undefined);
 
 }
 

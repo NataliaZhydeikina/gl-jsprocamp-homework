@@ -1,0 +1,3 @@
+[submodule "gl-jsprocamp-tests"]
+	path = gl-jsprocamp-tests
+	url = https://github.com/NataliaZhydeikina/gl-jsprocamp-tests.git
