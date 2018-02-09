@@ -3,15 +3,23 @@
   Function should return a number - amount of optional parameters that were passed into function.
   Hint: you are allowed to modify both function definition and function body.
 */
-export function countOptional() {
-
+export function countOptional(first, second, ...optional) {
+    return optional.length;
 }
 
 /*
   Write your implementation of native Function.prototype.bind method
 */
-export function bindContext(fn, context) {
-
+export function bindContext(fn, context, ...optional) {
+    const bindedFunc = function() {
+      return fn.call(context, ...optional);
+    };
+    bindedFunc.prototype = undefined;
+    Object.defineProperty(bindedFunc, 'length', {
+      writable: false,
+      value: fn.length
+    });
+    return bindedFunc;
 }
 
 
@@ -30,23 +38,25 @@ export function bindContext(fn, context) {
   Take to account, that you should track log call index starting from 1
 */
 export function addLogCapability(object) {
-
+    object.logNum = 0;
+    object.log = function () {
+        return `Log message #${++this.logNum}: ${this.name ? `my name is ${this.name}` : 'I dont have name'}`;
+    }
 }
-
 /*
   Write a function that creates custom topic logger:
   myLogger = logger('My Topic')
   myLogger('first message'); //=> My Topic: first message
 */
 export function logger(topic) {
-
+    return message => `${topic}: ${message}`;
 }
 
 /*
   Implement left to right compose function
 */
-export function compose() {
-
+export function compose(...functions) {
+    return (...args) => functions.reduce((previousValue, currentFunc) => currentFunc(previousValue), ...args);
 }
 
 /*
@@ -60,7 +70,7 @@ export function compose() {
   sumWith4(5) // 9
 */
 export function partial(fn) {
-
+    return (...args) => fn.bind(null, ...args);
 }
 
 export default {
